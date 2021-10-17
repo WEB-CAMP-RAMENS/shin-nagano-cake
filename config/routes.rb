@@ -1,18 +1,8 @@
 Rails.application.routes.draw do
-
-# 顧客用
-# URL /customers/sign_in ...
-devise_for :customers,skip: [:passwords,], controllers: {
-  registrations: "customer/registrations",
-  sessions: 'customer/sessions'
-}
-
-# 管理者用
-# URL /admin/sign_in ...
-devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
-  sessions: "admin/sessions"
-}
+  devise_for :admins
+  devise_for :customers
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
 
 
   namespace :admin do
@@ -22,4 +12,5 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
    resources :orders
    resources :order_details
  end
+
 end
