@@ -12,6 +12,9 @@ devise_for :customers,skip: [:passwords,], controllers: {
 devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
+
+root to: "admin/sessions#create"
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 
