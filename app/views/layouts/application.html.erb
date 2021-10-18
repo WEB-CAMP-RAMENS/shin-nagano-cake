@@ -10,7 +10,15 @@
   </head>
 
   <body>
+
+    <header>
+    <% if request.fullpath.include?("admin") %>
     <%= render 'layouts/header' %>
+    <% else %>
+    <%= render "layouts/header_customer" %>
+    <% end %>
+    </header>
+
     <%= yield %>
   </body>
 </html>
