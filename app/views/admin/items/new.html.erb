@@ -1,13 +1,31 @@
 <h1>商品新規登録</h1>
 
-<div class="form-inline">
-    <div class="form-group">
-      <label>商品名</label>
-      <%= f.text_field :name, :class => "form-control edit-form" %>
-    </div>
-    <div class="form-group">
-      <label>自己紹介</label>
-      <%= f.text_area :introduction, :class => "form-control edit-form" ,:size => "27x5" %>
-    </div>
+      <%= form_with model: @item, url:admin_items_path, local:true do |f| %>
+      <div class="form-inline">
+
+      <div class="form-group">
+       <label>商品画像</label>
+       <%=  f.attachment_field :image %>
+      </div>
+      <div class="form-group">
+       <label>商品名</label>
+       <%= f.text_field :name, :class => "form-control edit-form" %>
+      </div>
+       <div class="form-group">
+       <label>商品説明</label>
+       <%= f.text_area :introduction, :class => "form-control edit-form" ,:size => "27x5" %>
+      </div>
+      <div class="search-form">
+       <label>ジャンル</label>
+       <%= form_with url: search_path, method: :get, local: true do |f| %>
+       <%= f.text_field :content %>
+       <%= f.select :model, options_for_select({ "User" => "user", "Book" => "book" }) %>
+       <%= f.select :method, options_for_select({ "完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial" }) %>
+       <%= f.submit '検索' %>
+       <% end %>
+      </div>
+       
+      </div>
+  
   </div>
-  </div>
+  <% end %>
