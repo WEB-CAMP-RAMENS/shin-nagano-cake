@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     when Admin
       admin_items_path
     when Customer
-        customers_path
+      customers_my_page_path
     end
    end
 
@@ -14,13 +14,13 @@ class ApplicationController < ActionController::Base
     if resource_or_scope == :admin
       new_admin_session_path
     else
-      new_admin_session_path #後でやるとこ
+      new_customer_session_path #後でやるとこ
     end
     end
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :encrypted_password, :last_name, :first_name, :last_name_kana, :first_name_kana, :address, :postcode, :phone_number])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :encrypted_password, :last_name, :first_name, :last_name_kana, :first_name_kana, :address, :postal_code, :telephone_number])
   end
 
 end
