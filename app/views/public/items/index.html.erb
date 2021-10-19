@@ -1,0 +1,11 @@
+
+<h2 class="item_index_thema">商品一覧(全<%= @items.count %>件)</h2>
+
+<% @items.each do |item| %>
+  <%= attachment_image_tag item, :image,class:'item_photo' %>
+  <span>商品名<%= item.name %></span>
+  <span><%= item.price %></span>
+<% end %>
+
+<%= paginate @items %>
+

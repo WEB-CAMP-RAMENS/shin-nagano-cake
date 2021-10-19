@@ -5,6 +5,9 @@ Rails.application.routes.draw do
    get "customers/edit" => "customers#edit"
    get "customers/my_page" => "customers#show"
    patch "customers/my_page" => "customers#update"
+   get "/about" => "homes#about"
+   get "public/items" => "items#index"
+   get "public/item/:id" => "items#show"
   end
 
 # 顧客用
@@ -20,7 +23,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
 
-get "/about" => "public/homes#about"
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
