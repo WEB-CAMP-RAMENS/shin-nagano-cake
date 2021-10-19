@@ -18,11 +18,11 @@
 
         <% else %>
 
-          <li><%= link_to ' About　' , class: 'nav-link text-light' %></li>
+          <li><%= link_to ' About　' , about_path, class: 'nav-link text-light' %></li>
           #about_path
           <li><%= link_to ' 商品一覧　' , class: 'nav-link text-light' %></li>
           #products_path
-          <li><%= link_to ' 新規登録　' ,new_customer_registration_path ,class: 'nav-link text-light'%></li>
+          <li><%= link_to ' 新規登録　' ,new_customer_registration_path, class: 'nav-link text-light'%></li>
 
           <li><%= link_to ' ログイン　' ,new_customer_session_path, class: 'nav-link text-light' %></li>
 
