@@ -5,6 +5,7 @@ class Admin::ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @genre = @item.genre
 
   end
 
@@ -17,18 +18,23 @@ class Admin::ItemsController < ApplicationController
      @item = Item.new(item_params)
      @item.save
      redirect_to admin_item_path(@item.id)
-
   end
 
   def edit
      @item = Item.find(params[:id])
-     redirect_to new_admin_item_path(@item.id)
+     @genres = Genre.all
   end
 
   def update
      @item =Item.find(params[:id])
      @item.update(item_params)
      redirect_to admin_item_path(@item.id)
+  end
+
+  def destroy
+    @item = Item.find(params[:id])
+    @item.destroy
+    redirect_to admin_items_path
   end
 
   private

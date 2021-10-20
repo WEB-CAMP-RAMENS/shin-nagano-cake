@@ -14,7 +14,7 @@ class Public::OrdersController < ApplicationController
   def create
  	# sessionを使ってデータを一時保存
 	session[:order] = Order.new
-	cart_items = current_customer.cart_items
+	# cart_items = current_customer.cart_items
 
     # total_paymentのための計算
 	sum = 0
@@ -64,9 +64,11 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
+    @orders = current_customer.orders.page(params[:page]).per(6)
   end
 
   def show
+  	@order = Order.find(params[:id])
   end
 
   private
