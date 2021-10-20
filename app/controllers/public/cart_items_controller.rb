@@ -31,11 +31,6 @@ before_action :authenticate_customer!
     redirect_to cart_items_path
   end
 
-　def destroy_all
-    @cart_items=current_customer.cart_items
-    @cart_items.destroy_all
-    redirect_to cart_items_path
-  end
 
 
   private
