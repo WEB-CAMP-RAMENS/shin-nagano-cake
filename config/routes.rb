@@ -35,6 +35,10 @@ get "/about" => "public/homes#about"
 
   scope module: :public do
    resource :customers,only:[:edit,:update]
+   get "orders/confirm" => "orders#confirm"
+   post "orders/confirm" => "orders#confirm"
+   get "orders/complete" => "orders#complete"
+   resources :orders,only:[:show,:create,:index,:new]
    resources :addresses,except:[:new,:show]
    get "customers/unsubscribe" => "customers#unsubscribe"
    patch "customers/withdraw" => "customers#withdraw"
