@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="row"><h3 class="under px-4 mb-5">注文履歴詳細</h3></div>
+  <div class="row d-flex align-items-center mx-auto my-auto justify-content-center">
+    <div class="col-md-7 shadow-sm p-3 mb-5 bg-white rounded">
+      <table class="table">
+        <tbody>
+         <tr>
+          <th scope="row">注文日</th>
+           <%= @order.created_at.strftime("%Y年%-m月%-d日 %-H時%-M分") %>
+          </td>
+         </tr>
+         <tr>
+          <th scope="row">配送先</th>
+          <td>
+          <%= @order.address %>
+          </td>
+         </tr>
+         <tr>
+           <th scope="row">支払方法</th>
+           <td>
+             <% if @order.payment_method == true %>
+              <p>クレジットカード</p>
+             <% elsif @order.payment_method == false %>
+              <p>銀行支払</p>
+             <% end %>
+           </td>
+         </tr>
+         <tr>
+           <th scope="row">ステータス</th>
+           <td>
+             <%= @order.status %>
+           </td>
+         </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-auto"></div>
+    <div class="col-md-4 shadow-sm p-3 mb-5 bg-white rounded">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">商品合計</th>
+            <td>
+              ¥<%= @order.total_price.to_s(:delimited) %>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">配送料</th>
+            <td>
+              ¥<%= @order.postage %>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">配送料</th>
+            <td>
+              ¥<%= @order.postage %>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">請求額</th>
+            <td>
+              ¥<%= @order.amount.to_s(:delimited) %>
+            </td>
+          </tr>
+        </tbody>
+      </div>
+    </div>
+</div>
+<div class="container">
+  <div class="row d-flex align-items-center mx-auto my-auto justify-content-center">
+    <div class="col-9 rounded shadow-sm p-3 bg-white">
+      <table class="table">
+        <thead>
+          <tr><th>商品</th><th>単価（税込）</th><th>個数</th><th>小計</th></tr>
+        </thead>
+        <tbody>
+        <% @order_items.each do |order_item| %>
+          <tr>
+            <td scope="row"><%= order_item.product.title %></td>
+            <td scope="row">¥<%= order_item.product.add_tax_price.to_s(:delimited) %></td>
+            <td scope="row"><%= order_item.quantity %></td>
+            <td scope="row">¥<%= order_item.sub_total.to_s(:delimited) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

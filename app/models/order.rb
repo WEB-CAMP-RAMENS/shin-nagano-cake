@@ -12,7 +12,7 @@ class Order < ApplicationRecord
         preparing_delivery:3,#発送準備中
         delivered:4,#発送済み
     }
-    
+
     belongs_to :customer
     has_many :order_products, dependent: :destroy
 end
