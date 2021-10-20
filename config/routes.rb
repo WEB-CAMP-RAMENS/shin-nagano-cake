@@ -5,6 +5,16 @@ Rails.application.routes.draw do
    get "customers/edit" => "customers#edit"
    get "customers/my_page" => "customers#show"
    patch "customers/my_page" => "customers#update"
+   
+   
+   get "/about" => "homes#about"
+
+   get "/items" => "items#index"
+   get "/items/:id" => "items#show"
+
+   resources :cart_items, only: [:index, :update, :destroy, :create]
+   delete "cart_items/destroy_all" => "cart_items#destroy_all"
+
   end
 
 # 顧客用
@@ -20,7 +30,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
 
-get "/about" => "public/homes#about"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
