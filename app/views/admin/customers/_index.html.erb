@@ -1,0 +1,21 @@
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th>会員ID</th>
+      <th>氏名</th>
+      <th>メールアドレス</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% customers.each do |customer| %>
+    <tr>
+      <th scope="row">1</th>
+      <td><%= customers.customer_id %></td>
+      <td><%= customers.name %></td>
+      <td><%= customers.address %></td>
+      <td><%= customers.address %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
