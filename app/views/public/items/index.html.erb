@@ -1,10 +1,25 @@
-
-<h2 class="item_index_thema">商品一覧(全<%= @items.count %>件)</h2>
+ <div class="container">
+   <div class="row mb-2">
+      
+        <h4 class="mb-4 text-color col-3 text-center pt-4 rounded-pill">商品一覧(全<%= @items.count %>件)</h4>
+        <div class="col-8 cart_image offset-1"></div>
+    </div>
+    <div class="row">
+      <div class="col">
+      </div>
+    </div>
 
 <% @items.each do |item| %>
-  <%= attachment_image_tag item, :image,class:'item_photo' %>
-  <span>商品名<%= item.name %></span>
-  <span><%= item.price %></span>
+    <%= attachment_image_tag item, :image,class:'item_photo' %>
+    <td>商品名<%= item.name %></td>
+    <td><%= item.price %></td>
+  
+    <td>
+    <%= form_with model:item, local:true do |f|%>
+　　<%= f.select :amount, options_for_select((1..10).to_a, selected:item.amount) %>
+    <%= f.submit 'カートに入れる', class:"btn btn-primary" %>
+    <% end %>
+  　</td>
 <% end %>
 
 <%= paginate @items %>
