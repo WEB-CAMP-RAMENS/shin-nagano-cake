@@ -14,7 +14,7 @@ class Public::OrdersController < ApplicationController
   def create
  	# sessionを使ってデータを一時保存
 	session[:order] = Order.new
-	cart_items = current_customer.cart_items
+	# cart_items = current_customer.cart_items
 
     # total_paymentのための計算
 	sum = 0
