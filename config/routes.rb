@@ -5,8 +5,8 @@ Rails.application.routes.draw do
    get "customers/edit" => "customers#edit"
    get "customers/my_page" => "customers#show"
    patch "customers/my_page" => "customers#update"
-   
-   
+
+
    get "/about" => "homes#about"
 
    get "/items" => "items#index"
@@ -29,7 +29,6 @@ devise_for :customers,skip: [:passwords,], controllers: {
 devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
 }
-
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
