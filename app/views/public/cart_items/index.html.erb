@@ -1,46 +1,43 @@
  <div class="container">
     <div class="row mb-2">
-      
+
       <h4 class="mb-4 text-color col-3 text-center pt-4 rounded-pill">ショッピングカート</h4>
       <div class="col-8 cart_image offset-1"></div>
     </div>
-    
+
     <div class="row">
       <div class="col">
         <div class="text-right mb-1">
-          <%= link_to 'カートを空にする', cart_items_destroy_all_path, method: :delete, class:"btn btn-danger" %>
+          <%= link_to 'カートを空にする', destroy_all_path, method: :delete, class:"btn btn-danger" %>
         </div>
       </div>
     </div>
-    
-    
+
+
     <table>
       <div class="row">
         <div class="col">
           <table class="table table-bordered">
       <thead>
       <tr>
-		    <th></th>
 		    <%= attachment_image_tag @item, :image,class:'@item_photo' %>
 		    <th>商品名</th>
-		    <th>価格</th>
+		    <th>単価(税込)</th>
 		    <th>数量</th>
 		    <th>小計</th>
-		    <th></th>
 	    </tr>
 	    </thead>
-	    
+
 	    <tbody>
 	      <% @sum = 0 %>
         <% @cart_items.each do |cart_item| %>
         <tr>
           <td>
             <%= attachment_image_tag cart_item.item, :image, size:"60x50", fallback: "no_image.jpg" %>
-            <%= cart_itemt.item.name %>
+            <%= cart_item.item.name %>
           </td>
           <td>
-            <% tax_in = cart_item.item.add_tax_price %>
-            <%= tax_in.to_s(:delimited) %>
+            <%= cart_item.item.add_tax_price.round.to_s(:delimited) %>
           </td>
           <td>
 			      <%= form_with model:cart_item, local:true do |f|%>
@@ -48,17 +45,27 @@
             <%= f.submit '変更', class:"btn btn-primary" %>
             <% end %>
           <td>
+            <%= (cart_item.item.add_tax_price * cart_item.amount).round.to_s(:delimited) %>
+
           <td>
-            <% @subtotal = tax_in * cart_item.amount %>
-            <%= @subtotal.to_s(:delimited) %>
-          </td>
-          <td>  
-          <%= link_to "削除", cart_item_path(@cart_item), method: :delete , class:"btn btn-danger" %>
+          <%= link_to "削除", cart_item_path(cart_item), method: :delete , class:"btn btn-danger" %>
           </td>
 		    </tr>
-		  </tbody>
+		    	      <% end %>
+		    </tbody>
+
+		    <div class = "row">
+			    <div class = "offset-1 col-3">
+				    <table class="table table-bordered">
+						  <th>合計金額</th>
+					  </thead>
+					<tbody>
+						<td class="light-text"><%= @total.round.to_s(:delimited) %>円</td>
+            </table>
+		      </tbody>
+	
+
 		  
-		  <% end %>
 		</table>
-		
+
 		<span><%= link_to '買い物を続ける', items_path, :class => "btn btn-primary" %></span>

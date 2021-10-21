@@ -17,8 +17,12 @@ class Customer < ApplicationRecord
   validates :address, presence: true
   validates :telephone_number, presence: true
 
+
   def full_name
     last_name + first_name
   end
+
+  has_many :cart_items, dependent: :destroy
+  
 
 end
