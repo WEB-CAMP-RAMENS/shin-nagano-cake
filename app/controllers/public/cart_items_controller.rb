@@ -16,7 +16,7 @@ before_action :authenticate_customer!
         cart_item.update_attribute(:amount, new_amount)
         @cart_item.delete
         end
-      end
+
 
       @cart_item.save
       redirect_to cart_items_path,notice:"カートに商品が入りました"

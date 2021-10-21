@@ -15,12 +15,12 @@ class ApplicationController < ActionController::Base
     if resource_or_scope == :admin
       new_admin_session_path
     else
-      new_customer_session_path #後でやるとこ
+      root_path #後でやるとこ
     end
     end
-    
+
     helper_method :current_cart
-  
+
     def current_cart
       if current_customer
         current_cart = current_customer.cart || current_customer.create_cart!
@@ -30,8 +30,8 @@ class ApplicationController < ActionController::Base
       end
         current_cart
     end
-    
-    
+
+
   protected
 
   def configure_permitted_parameters
