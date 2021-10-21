@@ -37,9 +37,10 @@ class Admin::ItemsController < ApplicationController
     redirect_to admin_items_path
   end
 
+
   private
 
   def item_params
-    params.require(:item).permit(:name, :introduction, :image, :genre_id, :price, :item_id)
+    params.require(:item).permit(:name, :introduction, :image, :genre_id, :price, :is_active)
   end
 end
