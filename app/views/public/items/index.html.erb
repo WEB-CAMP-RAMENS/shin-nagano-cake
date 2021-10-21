@@ -8,7 +8,7 @@
     <div class="col">
       
     <% @items.each do |item| %>
-        <%= link_to item_path(item) do %>
+        <%= link_to items_path(item) do %>
           <div class="card mb-4">
             <%= attachment_image_tag item,:image, size:"255x210" %>
         <% end %>
