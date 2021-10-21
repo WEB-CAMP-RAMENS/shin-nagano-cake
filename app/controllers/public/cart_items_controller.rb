@@ -23,6 +23,7 @@ before_action :authenticate_customer!
         redirect_to cart_items_path
       end
 
+
   end
 
   def update
