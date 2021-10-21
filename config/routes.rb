@@ -9,8 +9,8 @@ Rails.application.routes.draw do
 
    get "/about" => "homes#about"
 
-   get "/items" => "items#index"
-   get "/items/:id" => "items#show"
+
+   resources :items, only: [:index, :show]
 
    resources :cart_items, only: [:index, :update, :destroy, :create]
    delete "cart_items/destroy_all" => "cart_items#destroy_all"
