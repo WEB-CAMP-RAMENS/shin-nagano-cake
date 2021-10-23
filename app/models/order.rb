@@ -6,6 +6,9 @@ class Order < ApplicationRecord
 
     belongs_to :customer
 
+    has_many :order_details, dependent: :destroy
+
+
 
     def sum_of_price
     item.price * amount
