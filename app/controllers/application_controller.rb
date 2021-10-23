@@ -15,11 +15,10 @@ class ApplicationController < ActionController::Base
     if resource_or_scope == :admin
       new_admin_session_path
     else
-      new_customer_session_path #後でやるとこ
+      root_path #後でやるとこ
     end
     end
-    
-    
+
   protected
 
   def configure_permitted_parameters

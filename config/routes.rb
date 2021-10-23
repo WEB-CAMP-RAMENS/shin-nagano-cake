@@ -13,7 +13,7 @@ Rails.application.routes.draw do
    resources :items, only: [:index, :show]
 
    resources :cart_items, only: [:index, :update, :destroy, :create]
-   delete "cart_items/destroy_all" => "cart_items#destroy_all"
+   delete "cart_items" => "cart_items#destroy_all", as:"destroy_all"
 
   end
 
@@ -43,7 +43,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
   scope module: :public do
    resource :customers,only:[:edit,:update]
-   get "orders/confirm" => "orders#confirm"
    post "orders/confirm" => "orders#confirm"
    get "orders/complete" => "orders#complete"
    resources :orders,only:[:show,:create,:index,:new]

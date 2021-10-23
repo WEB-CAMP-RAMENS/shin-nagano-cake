@@ -1,5 +1,5 @@
 class Public::OrdersController < ApplicationController
-  before_action :authenticate_customer!
+
 
   def new
    @order = Order.new
@@ -7,77 +7,74 @@ class Public::OrdersController < ApplicationController
    @addresses = Address.where(customer_id: current_customer.id)
   end
 
-  def confirm
-    @cart_items = current_customer.cart_items.page(params[:page]).per(4)
-  end
-
-  def create
- 	# sessionを使ってデータを一時保存
-	session[:order] = Order.new
-	# cart_items = current_customer.cart_items
-
-    # total_paymentのための計算
-	sum = 0
-	cart_items.each do |cart_item|
-		sum += (cart_item.item.add_tax_price).floor * cart_item.amount
-	end
-
-	session[:order][:shipping_cost] = 800
-	#送料込みの合計金額
-	session[:order][:total_payment] = sum + session[:order][:shipping_cost]
-	#注文ステータス
-	session[:order][:status] = 0
-	session[:order][:customer_id] = current_customer.id
-	# ラジオボタンで選択された支払方法のenum番号を渡している
-	session[:order][:payment_method] = params[:payment_method].to_i
-
-    # ラジオボタンで選択されたお届け先によって条件分岐
-	destination = params[:a_method].to_i
-	# ご自身の住所が選択された時
-	if destination == 0
-		session[:order][:postal_code] = customer.postal_code
-		session[:order][:address] = customer.address
-		session[:order][:name] = customer.last_name + customer.first_name
-	# 登録済住所が選択された時
-	elsif destination == 1
-		address = Address.find(params[:address_for_order])
-		session[:order][:postal_code] = address.postal_code.to_i
-		session[:order][:address] = address.address
-		session[:order][:name] = address.name
-	# 新しいお届け先が選択された時
-	elsif destination == 2
-		session[:new_address] = 2
-		session[:order][:postal_code] = params[:postal_code].to_i
-		session[:order][:address] = params[:address]
-		session[:order][:name] = params[:name]
-	end
-	# お届け先情報に漏れがあればリダイレクト
-	if session[:order][:postal_code].presence && session[:order][:address].presence && session[:order][:name].presence
-		redirect_to orders_confirm_path
-	else
-		flash[:alert] = 'お届け先情報を入力してください'
-		redirect_to new_order_path
-	end
-  end
 
   def complete
   end
 
   def index
-    @orders = current_customer.orders.page(params[:page]).per(6)
+    @orders = current_customer.orders.all
   end
 
   def show
   	@order = Order.find(params[:id])
+    @order_detail=CartItem.all
+  end
+
+  def confirm
+    @order = Order.new
+    @postage = 800
+    @cart_items = current_customer.cart_items.all
+    @order.payment_method = params[:order][:payment_method]
+    @total = 0
+     @cart_items.each do |cart_item|
+       @total += (cart_item.item.price * cart_item.amount) * 1.1
+     end
+    @order.total_payment = @total
+
+    case params[:order][:address_option]
+      when '0'
+        @order.postal_code = current_customer.postal_code
+        @order.address = current_customer.address
+        @order.name = current_customer.full_name
+      when '1'
+        address = Address.find(params[:order][:address_id])
+        @order.postal_code = address.postal_code
+        @order.address = address.address
+        @order.name = address.name
+      when '2'
+        @order.postal_code = params[:order][:postal_code]
+        @order.address = params[:order][:address]
+        @order.name = params[:order][:name]
+    end
+  end
+
+  def create
+    @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
+    @order.shipping_cost = 800
+    @order.save
+    @cart_items = CartItem.all
+    @cart_items.each do |cart_item|
+      @order_detail = OrderDetail.new
+      @order_detail.item_id = cart_item.item.id
+      @order_detail.order_id = @order.id
+      @order_detail.price = ((cart_item.item.price) * 1.1).floor
+      @order_detail.amount = cart_item.amount
+      if @order_detail.save
+        cart_item.destroy
+      end
+    end
+    redirect_to orders_complete_path
   end
 
   private
 
   def order_params
-    params.require(:order).permit(:customer_id, :name, :postal_code, :address, :payment_method, :total_price, :amount)
+    params.require(:order).permit(:postal_code, :address, :name, :payment_method, :total_payment )
   end
 
-  def shipping_params
-    params.require(:order).permit(:customer_id, :name, :postal_code, :address)
+  def confirm_params
+     params.require(:order).permit(:address_option, :address_id, :postal_code, :address, :name, :payment_method)
   end
+
 end
