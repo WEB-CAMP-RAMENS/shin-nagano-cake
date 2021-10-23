@@ -6,24 +6,17 @@
         <tbody>
          <tr>
           <th scope="row">注文日</th>
-           <%= @order.created_at.strftime("%Y年%-m月%-d日 %-H時%-M分") %>
-          </td>
+           <td><%= @order.created_at.strftime("%Y年%-m月%-d日 %-H時%-M分") %></td>
          </tr>
          <tr>
           <th scope="row">配送先</th>
           <td>
-          〒<%= @order.post_code %><br><%= @order.address %><br><%= @order.name %>
+          〒<%= @order.postal_code %><br><%= @order.address %><br><%= @order.name %>
           </td>
          </tr>
          <tr>
            <th scope="row">支払方法</th>
-           <td>
-             <% if @order.payment_method == true %>
-              <p>クレジットカード</p>
-             <% elsif @order.payment_method == false %>
-              <p>銀行支払</p>
-             <% end %>
-           </td>
+           <td><%= @order.payment_method %></td>
          </tr>
          <tr>
            <th scope="row">ステータス</th>
@@ -41,7 +34,7 @@
           <tr>
             <th scope="row">商品合計</th>
             <td>
-              <%= @order.total_payment-800 %>
+              <%= @order.order.total_payment-800 %>
             </td>
           </tr>
           <tr>
@@ -53,7 +46,7 @@
           <tr>
             <th scope="row">請求額</th>
             <td>
-              ¥<%= @order.total_payment %>
+              ¥<%= @order.order.total_payment %>
             </td>
           </tr>
         </tbody>
@@ -68,12 +61,12 @@
           <tr><th>商品</th><th>単価（税込）</th><th>個数</th><th>小計</th></tr>
         </thead>
         <tbody>
-        <% @order_items.each do |order_item| %>
+        <% @order_detail.each do |order_detail| %>
           <tr>
-            <td scope="row"><%= order_item.item.item_name %></td>
-            <td scope="row">¥<%= order_item.product.add_tax_price_without_tax %></td>
-            <td scope="row"><%= order_item.quantity %></td>
-            <td scope="row">¥<%= order_item.subtotal %></td>
+            <td scope="row"><%= order_detail.item.item_name %></td>
+            <td scope="row">¥<%= order_detail.product.add_tax_price %></td>
+            <td scope="row"><%= order_detail.quantity %></td>
+            <td scope="row">¥<%= order_detail.subtotal %></td>
           </tr>
         <% end %>
         </tbody>

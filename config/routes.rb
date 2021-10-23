@@ -43,7 +43,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
   scope module: :public do
    resource :customers,only:[:edit,:update]
-   get "orders/confirm" => "orders#confirm"
    post "orders/confirm" => "orders#confirm"
    get "orders/complete" => "orders#complete"
    resources :orders,only:[:show,:create,:index,:new]

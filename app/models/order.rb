@@ -5,7 +5,7 @@ class Order < ApplicationRecord
   enum address_option: {　ご自身の住所: 0, 選択済み住所: 1,　新しいお届け先: 2 }
 
     belongs_to :customer
-
+    has_many :order_details
 
     def sum_of_price
     item.price * amount
