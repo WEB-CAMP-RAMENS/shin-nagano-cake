@@ -22,7 +22,5 @@ class Customer < ApplicationRecord
     last_name + first_name
   end
 
-  has_many :cart_items, dependent: :destroy
-  
 
 end
