@@ -83,9 +83,9 @@ ActiveRecord::Schema.define(version: 2021_10_21_051454) do
     t.integer "item_id"
     t.integer "price"
     t.integer "amount"
-    t.integer "making_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "making_status", default: 0
   end
 
   create_table "ordered_items", force: :cascade do |t|
@@ -108,12 +108,9 @@ ActiveRecord::Schema.define(version: 2021_10_21_051454) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "payment_method"
-    t.integer "order_status"
     t.integer "address_option"
     t.integer "address_id"
-    t.string "new_post_code"
-    t.string "new_address"
-    t.string "new_name"
+    t.integer "order_status", default: 0
   end
 
 end
