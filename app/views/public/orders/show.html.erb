@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-5">
   <div class="row"><h3 class="under px-4 mb-5">注文履歴詳細</h3></div>
   <div class="row d-flex align-items-center mx-auto my-auto justify-content-center">
     <div class="col-md-7 shadow-sm p-3 mb-5 bg-white rounded">
@@ -27,14 +27,15 @@
         </tbody>
       </table>
     </div>
-    <div class="col-auto"></div>
+    <div class="col-auto">
+    </div>
     <div class="col-md-4 shadow-sm p-3 mb-5 bg-white rounded">
       <table class="table">
         <tbody>
           <tr>
             <th scope="row">商品合計</th>
             <td>
-              <%= @order.order.total_payment-800 %>
+              <%= @order.total_payment %>
             </td>
           </tr>
           <tr>
@@ -46,12 +47,13 @@
           <tr>
             <th scope="row">請求額</th>
             <td>
-              ¥<%= @order.order.total_payment %>
+              ¥<%= (@order.total_payment+800) %>
             </td>
           </tr>
         </tbody>
-      </div>
+      </table>
     </div>
+  </div>
 </div>
 <div class="container">
   <div class="row d-flex align-items-center mx-auto my-auto justify-content-center">
@@ -61,12 +63,12 @@
           <tr><th>商品</th><th>単価（税込）</th><th>個数</th><th>小計</th></tr>
         </thead>
         <tbody>
-        <% @order_detail.each do |order_detail| %>
+        <% @order.order_details.each do |order_detail| %>
           <tr>
-            <td scope="row"><%= order_detail.item.item_name %></td>
-            <td scope="row">¥<%= order_detail.product.add_tax_price %></td>
-            <td scope="row"><%= order_detail.quantity %></td>
-            <td scope="row">¥<%= order_detail.subtotal %></td>
+            <td scope="row"><%= order_detail.item.name %></td>
+            <td scope="row">¥<%= order_detail.item.add_tax_price.round.to_s(:delimited) %></td>
+            <td scope="row"><%= order_detail.amount %></td>
+            <td scope="row">¥<%= (order_detail.item.add_tax_price * order_detail.amount).round.to_s(:delimited)  %></td>
           </tr>
         <% end %>
         </tbody>

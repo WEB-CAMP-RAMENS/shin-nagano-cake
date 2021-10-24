@@ -17,7 +17,6 @@ class Public::OrdersController < ApplicationController
 
   def show
   	@order = Order.find(params[:id])
-    @order_detail=CartItem.all
   end
 
   def confirm
