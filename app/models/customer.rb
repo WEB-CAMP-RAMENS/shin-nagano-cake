@@ -11,10 +11,24 @@ class Customer < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name_kana, presence: true
   validates :first_name_kana, presence: true
-  
+
   validates :postal_code, presence: true
   validates :address, presence: true
   validates :telephone_number, presence: true
+
+
+  # --------姓＋名をフルネームにする---------
+  def full_name
+    self.last_name + self.first_name
+  end
+
+# ---------カナ姓＋カナ名をフルネームにする--------
+
+  def kana_full_name
+    self.last_name_kana + self.first_name_kana
+  end
+
+
 
 
 end
