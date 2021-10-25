@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_21_051454) do
+ActiveRecord::Schema.define(version: 2021_10_23_111335) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer "customer_id"
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(version: 2021_10_21_051454) do
     t.string "address"
     t.string "telephone_number"
     t.boolean "is_deleted", default: false
+    t.string "full_name"
+    t.string "kana_full_name"
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
@@ -83,9 +85,9 @@ ActiveRecord::Schema.define(version: 2021_10_21_051454) do
     t.integer "item_id"
     t.integer "price"
     t.integer "amount"
-    t.integer "making_status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "making_status", default: 0
   end
 
   create_table "ordered_items", force: :cascade do |t|
@@ -108,12 +110,9 @@ ActiveRecord::Schema.define(version: 2021_10_21_051454) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "payment_method"
-    t.integer "order_status"
     t.integer "address_option"
     t.integer "address_id"
-    t.string "new_post_code"
-    t.string "new_address"
-    t.string "new_name"
+    t.integer "order_status", default: 0
   end
 
 end

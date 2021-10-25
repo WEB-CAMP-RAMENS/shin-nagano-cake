@@ -33,6 +33,7 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :admin do
+  get "homes/top" => "homes#top"
    resources :items
    resources :genres
    resources :customers
@@ -43,7 +44,6 @@ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
 
   scope module: :public do
    resource :customers,only:[:edit,:update]
-   get "orders/confirm" => "orders#confirm"
    post "orders/confirm" => "orders#confirm"
    get "orders/complete" => "orders#complete"
    resources :orders,only:[:show,:create,:index,:new]

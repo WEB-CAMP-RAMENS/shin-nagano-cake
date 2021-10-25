@@ -1,18 +1,22 @@
 class Admin::OrderDetailsController < ApplicationController
-   
-   
-  def update
+
+ def update
     @order_detail = OrderDetail.find(params[:id])
-    @order_detail_status = params[:order_detail][:making_status].to_i
-    @order_detail.update(making_status: @order_detail_status)
-    @order = @order_detail.order
-    @order_details = OrderDetail.all
-    
-    if @order_detail_status == 2
-      @order_detail.order.update(status: 2)
-    elsif @order.order_details.count == @order.order_details.where(making_status: 3).count
-      @order_detail.order.update(status: 3)
+    @order_detail.update(order_detail_params)
+    if @order_detail.making_status == "製作中"
+      @order_detail.order.update(order_status: "製作中")
     end
-    redirect_to admins_order_path(@order_detail.order)
+    @order_details = OrderDetail.where(order_id: @order_detail.order.id)
+    if @order_details.count == @order_details.where(making_status: "製作完了").count
+      @order_detail.order.update(order_status: "発送準備中")
+    end
+
+    redirect_to request.referer
+ end
+
+  private
+  def order_detail_params
+    params.require(:order_detail).permit(:making_status)
   end
+
 end
