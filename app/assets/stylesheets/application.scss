@@ -16,3 +16,44 @@
 @import "bootstrap";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+
+
+.main-container {
+
+   animation: image_anime 6s ease infinite;
+   height: 500px;
+   width: 100%;
+   background-size: cover;
+   background-position: center;
+   background-color:rgba(169,169,169,0.5);
+   background-blend-mode:lighten;
+  }
+
+ @keyframes image_anime {
+   0% {
+     background-image: url(http://img.kb-cdn.com/imgviewer/NVpIM2ptOHhYRzVmUk5rM1NrNlFxYVV6enV4aGk2UFRJMmxPckdDUUVNYWtkMEJjMWYzaUNtck5ra1ZnWGUrMEFYNGM5cXZmd0Jnc1krY1Y0T0t3eGMySm5sVE9FUzY1MjRaQkpic3RseWFHblFEc3VyMTRYbkcyUXZDWVdEZ20rSlNRajhUM1BMUDA1Wk5yNi92N1dleHk0SnRpNjlaN1Y5Vmo4RWtxYTE4ZlgybDhaQ3VnMy9NaUpkYXVCaEVYZFB0OTF3M0pDZ05rRFRFWTgvRGdUQ3E4TUQ0aGpTdWpMQXN2U3lvNmhjaUYvbE1ndnBnZitmemt6bHBzaHNkNkRKaXl2TnI0WGtObWk2eGM1dWV1YVE9PQ==?square=0);
+   }
+   50% {
+     background-image: url(https://media.xico.media/wp/wp-content/uploads/2019/04/22011333/DSC0628-1024x684.jpg);
+   }
+   100% {
+     background-image: url(http://img.kb-cdn.com/imgviewer/NVpIM2ptOHhYRzVmUk5rM1NrNlFxYVV6enV4aGk2UFRJMmxPckdDUUVNWWxHcE40NkE3dE00cGNDb0I0MnpkRURMT0Qwa0NNY3RCK3VEVFVNNjgrK0xCckZ4ZFFsZkRObWV6QzVzR0M2c3NYa3ZUSExjYUNmbkwrVWN3MDVySmo4QUlTUFExNUxZbysvM1BnRE1mcXVQNWJTUThuWVhBOG0xZ2Q2b08vV21uczNDNy9KZHJsaDI5UDg1Y0RiRlVsd3JLM0k3WnBuMzczSlk3dEZtc3JaU3RuKzQySGVrdHNTMTlwU1pwSUJ6dz0=?square=0);
+   }
+ }
+
+.nagano-text {
+   text-align: center;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%,-50%);
+   font-size: 20px;
+   margin-top: 120px;
+
+}
+
+.text-right {
+   padding: 60px;
+}
+
+
