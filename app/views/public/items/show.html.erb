@@ -1,21 +1,27 @@
- <div class="container">
+ <div class="container px-5 px-sm-5">
   <div class="row">
     <div class="col-md-4">
-
+      <br>
+      <br>
       <%= attachment_image_tag @item,:image, size:"255x210" %>
-
     </div>
 
     <div class="col-md-4">
-      <span><%= @item.name %></span>
-      <span><%= @item.introduction %></span>
-      <span><%= @item.price %></span>
+      <br>
+      <br>
+      <h2 class="row"><%= @item.name %></h2>
+      <h5 class="row"><%= @item.introduction %></h5>
+      <div class="row mt-5">
+      <h4 class="col-12 p-0">
+        <% tax_in = @item.price * 1.10 %>
+        <%= tax_in.round.to_s(:delimited) %>円(税込)</h4>
     </div>
 
       <%= form_with model:@cart_item, url:cart_items_path, method: :post, local:true do |f|%>
       <%= f.hidden_field :item_id, :value => @item.id %>
-      <%= f.select :amount, options_for_select((1..20).to_a), include_blank: "個数選択" %>
-      <%= f.submit "カートに入れる" %>
+      <%= f.select :amount, options_for_select((1..20).to_a, selected:@cart_item.amount) %>
+
+      <%= f.submit "カートに入れる", class:"btn btn-outline-success" %>
       <% end %>
   </div>
 </div>
