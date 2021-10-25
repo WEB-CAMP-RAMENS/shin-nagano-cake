@@ -10,11 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 2021_10_23_111335) do
+=======
 
 ActiveRecord::Schema.define(version: 2021_10_23_062944) do
 =======
 ActiveRecord::Schema.define(version: 2021_10_21_051454) do
 
+>>>>>>> dae10db8a615d45c567a12c9d7f8e90648100eac
 
   create_table "addresses", force: :cascade do |t|
     t.integer "customer_id"
@@ -62,6 +66,7 @@ ActiveRecord::Schema.define(version: 2021_10_21_051454) do
     t.string "telephone_number"
     t.boolean "is_deleted", default: false
     t.string "full_name"
+    t.string "kana_full_name"
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
