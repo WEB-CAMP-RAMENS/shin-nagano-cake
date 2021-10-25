@@ -35,7 +35,7 @@
           <tr>
             <th scope="row">商品合計</th>
             <td>
-              <%= @order.total_payment %>円
+              <%= @order.total_payment.to_s(:delimited)  %>円
             </td>
           </tr>
           <tr>
@@ -47,7 +47,7 @@
           <tr>
             <th scope="row">請求額</th>
             <td>
-              <%= (@order.total_payment+800) %>円
+              <%= (@order.total_payment+800).to_s(:delimited)  %>円
             </td>
           </tr>
         </tbody>
