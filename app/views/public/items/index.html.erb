@@ -6,7 +6,7 @@
     </div>
 
     <div class="col">
-      
+
     <% @items.each do |item| %>
         <%= link_to item_path(item) do %>
           <div class="card mb-4">
@@ -18,7 +18,7 @@
           </div>
           </div>
     <% end %>
-    
+
 
     <%= paginate @items %>
  </div>
