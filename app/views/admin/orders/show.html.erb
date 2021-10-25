@@ -82,7 +82,8 @@
           </tr>
           <tr>
             <th>請求金額合計　</th>
-            <th><%= (@item_total).floor + @order.shipping_cost %>円</th>
+            
+            <th><%= (@item_total + @order.shipping_cost).floor.to_s(:delimited)  %>円</th>
           </tr>
         </table>
           </div>
