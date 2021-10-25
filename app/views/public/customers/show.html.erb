@@ -2,13 +2,12 @@
  <div class="container">
   <div style ="text-align:center">
    <div class="row">
-     <div class="col-sm-12 col-md-10 col-lg-8 px-5 px-sm-0 mx-auto" style="padding:30px;">
-
+     <div class="col-sm-12 col-md-10 col-lg-8 px-5 px-sm-0 mx-auto">
        <h3 class="mb-4">  My path </h3>
        <hr>
      </div>
+     <div class="table">
      <table align="center" class="table table-bordered border col-6 mt-3 mb-5">
-
        <tr>
          <th class="col-2 table-color">氏名</th>
          <th class="col-4"><%= @customer.last_name %><%= @customer.first_name %></th>
@@ -34,6 +33,7 @@
          <th><%= @customer.email %></th>
        </tr>
      </table>
+     </div>
  </div>
      <div class="col-6 mypage_image"></div>
      <div class="col">
@@ -42,7 +42,7 @@
        <h5>注文履歴　<%= link_to "一覧を見る", orders_path, class: 'btn btn-outline-dark col-2' %></h5>
     </div>
    </div>
-   </div>
+  </div>
  </div>
 </body>
 
