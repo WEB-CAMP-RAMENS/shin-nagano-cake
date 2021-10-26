@@ -1,35 +1,35 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-12">
-<h2 class="mb-5 col-3 text-center text-color">ログイン</h2>
-<h5 class="mt-5 mb-4 ml-4 col-4 text-center text-color">会員の方はこちらからログイン</h5>
+    <div class="row d-flex align-items-center my-auto justify-content-center" style="height: 60vh; ">
+     <div class="col-auto shadow p-3 bg-white rounded">
+      <div class="text-center signin d-flex" id="form-signin">
+       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-　<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+       <div class="align-items-center p-3 my-3">
+       <h1 class="h3 mb-0 font-weight-normal">log in</h1>
+       </div>
 
+       <div class="form-group">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+       </div>
 
-　<div class="field">
-    <%= f.label :"メールアドレス", class: 'col-3' %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+       <div class="form-group">
+        <%= f.password_field :password, autocomplete: "current-password", id: "inputPassword", class: "form-control", placeholder: "Password"  %>
+       </div>
 
-  <div class="field">
-    <%= f.label :"パスワード(6文字以上)", class: 'col-3' %>
-    <% if @minimum_password_length %>
-    <% end %>
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.label :"　", class: 'col-3' %>
-    <%= f.submit "ログイン", class: 'btn btn-primary col-2' %>
-  </div>
-<% end %>
-
-<h5 class="mt-5 mb-4 ml-4 col-4 text-center login-color">会員登録がお済みでない方</h5>
-<div class="ml-5">
-  <p><%= link_to "こちら", new_customer_registration_path, class: 'text-decolation' %>からログインしてください。</p>
+       <div class="form-group">
+        <%= f.submit "Log in", class: "btn btn-outline-dark ml-5" %>
+       </div>
+       <% end %>
+      </div>
+     </div>
+ </div>
 </div>
 
+<div class="container">
+ <div style="text-align:center;">
+  <h6 class = "px-4">会員登録がお済みでない方</h6>
+  <div class="ml-5 ">
+  <p><%= link_to "こちら", new_customer_registration_path, class: 'text-decolation' %>からログインしてください。</p>
   </div>
  </div>
 </div>

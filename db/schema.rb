@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_16_085632) do
+ActiveRecord::Schema.define(version: 2021_10_23_111335) do
 
   create_table "addresses", force: :cascade do |t|
-    t.integer "address_id"
-    t.integer "cutomer_id"
+    t.integer "customer_id"
     t.string "name"
     t.string "postal_code"
     t.string "address"
@@ -35,7 +34,6 @@ ActiveRecord::Schema.define(version: 2021_10_16_085632) do
   end
 
   create_table "cart_items", force: :cascade do |t|
-    t.integer "cart_item_id"
     t.integer "item_id"
     t.integer "customer_id"
     t.integer "amount"
@@ -53,26 +51,25 @@ ActiveRecord::Schema.define(version: 2021_10_16_085632) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "customer_id"
     t.string "last_name_kana"
     t.string "first_name_kana"
     t.string "postal_code"
     t.string "address"
     t.string "telephone_number"
-    t.boolean "is_deleted"
+    t.boolean "is_deleted", default: false
+    t.string "full_name"
+    t.string "kana_full_name"
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
   create_table "genres", force: :cascade do |t|
-    t.integer "genre_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "items", force: :cascade do |t|
-    t.integer "item_id"
     t.integer "genre_id"
     t.string "name"
     t.string "image_id"
@@ -84,18 +81,26 @@ ActiveRecord::Schema.define(version: 2021_10_16_085632) do
   end
 
   create_table "order_details", force: :cascade do |t|
-    t.integer "order_detail_id"
     t.integer "order_id"
     t.integer "item_id"
     t.integer "price"
     t.integer "amount"
-    t.integer "making_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "making_status", default: 0
+  end
+
+  create_table "ordered_items", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "order_id"
+    t.integer "purchase_price"
+    t.integer "product_status", default: 0
+    t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "order_id"
     t.integer "customer_id"
     t.string "postal_code"
     t.string "address"
@@ -104,6 +109,10 @@ ActiveRecord::Schema.define(version: 2021_10_16_085632) do
     t.integer "total_payment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "payment_method"
+    t.integer "address_option"
+    t.integer "address_id"
+    t.integer "order_status", default: 0
   end
 
 end
