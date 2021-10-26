@@ -19,6 +19,16 @@ class Customer < ApplicationRecord
   validates :telephone_number, presence: true
 
 
+
+
+# ---------カナ姓＋カナ名をフルネームにする--------
+
+  def kana_full_name
+    self.last_name_kana + self.first_name_kana
+  end
+
+
+
   def full_name
     last_name + first_name
   end
