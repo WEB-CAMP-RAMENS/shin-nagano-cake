@@ -14,7 +14,7 @@
                   <%= order_detail.item.name %>
                  <% end %>
                 </td>
-                <td>¥<%= (order.total_payment + 800) %></td>
+                <td><%= (order.total_payment + 800).to_s(:delimited)  %>円</td>
                 <td><%= order.order_status %></td>
                 <th><%= link_to "詳細", order_path(order.id), class: "btn btn-outline-primary mr-1" %></th>
               </tbody>
